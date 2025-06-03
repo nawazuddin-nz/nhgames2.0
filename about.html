@@ -1,0 +1,239 @@
+<html>
+<head>
+  <title>about</title>
+<link rel="stylesheet" href="style.css">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<style>
+
+  body{
+    background-color: rgb(255, 248, 248);
+  }
+    .insidetext{
+        height: 400px;
+        width: 400px;
+        /* border: 2px solid black; */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 30px;
+        font-size:20px;
+        font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        /* font-weight: 700; */
+        
+    }
+   
+    .insidetextt{
+        height: 350px;
+        width: 350px;
+        /* border: 2px solid black; */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+    }
+
+    .lee0{
+      display: flex;
+            justify-content: space-around;
+            align-items: center;
+            width: 80%;
+            height: 80vh;
+            /* background: linear-gradient(to right, #ece9e6, #ffffff); */
+            border-radius: 10px;
+            padding: 20px;
+            margin-left: 50px;
+            /* border: 5px solid black; */
+  }
+  .lee1{
+    height: 550px;
+    width: 700px;
+    /* border: 2px solid black; */
+    margin-top: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* justify-content: center; */
+    gap: 10px;
+
+  }
+
+ 
+
+
+.icons{
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  font-size: 20px;
+  position: fixed;
+ 
+            left: 50%;
+            bottom: 5%;
+          font-size: 23px;
+
+            transform: translateX(-50%);
+  /* cursor: pointer; */
+}
+
+
+.icons i:hover{
+  font-size: larger;
+  transition: 0.2s ease-in-out;
+    text-shadow: 0px 0px 5px rgba(128, 0, 0, 0.459);;
+}
+#zzz {
+    position: relative;
+    display: inline-block;
+    color: inherit; /* Keep the original text color */
+    font-weight: bold;
+    text-decoration: none; /* Remove default underline */
+}
+
+#zzz::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 4px; /* Adjust the thickness of the underline */
+    bottom: -2px; /* Adjust the vertical position of the underline */
+    left: 0;
+    background-color: #b45a06; /* Blue color for the underline */
+    border-radius: 5px; /* Rounded corners for a softer appearance */
+}
+
+
+
+
+
+.slider-container {
+            width: 160px;
+            height: 35vw;
+            box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+            overflow: hidden;
+            position: relative;
+            /* border: 2px solid #000000; */
+            border-radius: 10px;
+            margin-bottom: 40px;
+        }
+        #includes{
+          font-family: kalam;
+          font-size: 30px;
+          font-weight: 700;
+          margin: 0;
+        }
+.right{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 400px;
+
+}
+
+
+
+
+        .slider {
+            display: inline-block;
+            /* white-space: nowrap; */
+            animation: scroll 20s linear infinite;
+            height: 100%;
+        }
+        .slider img {
+            width: 160px;
+            height: 160px;
+            object-fit: cover;
+            display: block;
+            margin-bottom: 30px; /* Add a gap of 30px between images */
+        }
+        @keyframes scroll {
+            0% {
+                transform: translateY(0);
+            }
+            100% {
+                transform: translateY(-1760px); /* -200px * 8 images + 30px * 7 gaps */
+            }
+        }
+      
+</style>
+</head>
+<body>
+  
+  <div class="navbar ">
+      <div class="nav-left flex">
+        <img src="..\img\logo.jpg" alt="sgt logo">  <h2 id="logo-txt">Games</h2> 
+      </div>
+        <div class="nav-right flex">
+          <ul class="flex ">
+            <li><a class="nav-links" href="index.html">Home</a></li>
+ 
+            <li><a class="nav-links" href="developers.html">Developers</a></li>
+            <li><a class="nav-links" href="contact.html">Contact</i></a></li>
+       
+          </ul>
+          
+        </div>
+        
+</div>
+
+<div class="lee0">
+
+
+
+
+  <div class="lee1">
+    <div class="insidetext">
+
+<p>Welcome to NH Games, <br> where fun is our mission! Founded by college students <span id="zzz"> Nawaz </span> and <span id="zzz">Harsha,</span> <br> NH Games offers a simple collection of fun and logical experiances, With a focus on easy and enjoyable gaming, NH Games is perfect for kicking boredom away. <br> As NH Games grows, we want to add more fun stuff, make things better. <br> <br> Got a question? Drop us ur query at [nhgames@gmail.com]. Stay in the loop with our updates by following us on [insta and facebook]. Let's play and have fun and learning together!</p>
+
+    </div>
+  </div><br>
+  <div class="right">
+  <p id="includes">NH Games include..</p>
+  <div class="slider-container">
+    
+    <div class="slider">
+     
+        <img src="..\img\rps.jpg" alt="Image 1">
+        <img src="..\img\ttt.png" alt="Image 2">
+        <img src="..\img\sn2.jpeg" alt="Image 3">
+        <img src="..\img\ccc.jpg" alt="Image 4">
+        <img src="..\img\java.jpeg" alt="Image 5">
+        <img src="..\img\toh.jpg" alt="Image 6">
+        <img src="..\img\math.jpg" alt="Image 7">
+        <img src="..\img\bball.webp" alt="Image 8">
+        <!-- Duplicate images for seamless infinite scroll -->
+        <img src="..\img\rps.jpg" alt="Image 1">
+        <img src="..\img\ttt.png" alt="Image 2">
+        <img src="..\img\sn2.jpeg" alt="Image 3">
+        <img src="..\img\ccc.jpg" alt="Image 4">
+        <img src="..\img\java.jpeg" alt="Image 5">
+        <img src="..\img\toh.jpg" alt="Image 6">
+        <img src="..\img\math.jpg" alt="Image 7">
+        <img src="..\img\bball.webp" alt="Image 8">
+        <img src="..\img\rps.jpg" alt="Image 1">
+        <img src="..\img\ttt.png" alt="Image 2">
+        <img src="..\img\sn2.jpeg" alt="Image 3">
+        <img src="..\img\ccc.jpg" alt="Image 4">
+        <img src="..\img\java.jpeg" alt="Image 5">
+        <img src="..\img\toh.jpg" alt="Image 6">
+        <img src="..\img\math.jpg" alt="Image 7">
+        <img src="..\img\bball.webp" alt="Image 8">
+</div>
+
+
+    </div>
+  </div>
+</div>
+
+  <div class="icons"> Be in touch
+    <div class="1"> <a href="https://www.instagram.com/nh.gamess?igsh=MXYzN2Z6dmh5bTl4YQ=="> <i class="fa-brands fa-instagram"></i></a></div>
+    <div class="1"> <a href=""> <i class="fa-brands fa-facebook"></i></a></div>
+     <div class="1"> <a href="https://wa.link/l4n9jm"> <i class="fa-brands fa-whatsapp"></i></a></div>
+  </div>
+  
+
+</body>
+</html>
+
+

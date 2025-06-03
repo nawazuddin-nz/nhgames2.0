@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissors</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+    <link rel="stylesheet" href="fonts.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #d5b3ffa2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: #fefae0;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            text-align: center;
+            width: 400px;
+          
+        }
+
+        h1 {
+            color: #333;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+    
+        }
+
+        .scores {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .scores p {
+            font-size: 1.2em;
+            color: #003049;
+            margin: 0;
+        }
+
+        #userScore, #computerScore {
+            font-weight: bold;
+            color: #003049;
+        }
+
+        .choices {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .choice {
+            background-color: #003049;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 4vw;
+            margin: 0 20px;
+            padding: 20px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .choice:hover {
+            background-color: #370617
+        }
+
+
+.choice:hover {
+    background: linear-gradient(45deg, #370617, #9d0208);
+    transform: scale(1.05);
+}
+
+        #result {
+            font-size: 1.4em;
+            color: #333;
+	        font-family:poppins;
+           
+        }
+@media (max-width:600px) {
+    .container{
+        width: 270px;
+    }
+h1{
+    font-size: 30px;
+}
+.scores p{
+    font-size: 4vw;
+}
+#result {
+            font-size: 1.2em;
+        }
+        .choice{
+            font-size: 7vw;
+        }
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Rock Paper Scissors</h1>
+        <div class="scores">
+            <p>User Score: <span id="userScore">0</span></p>
+            <p>Computer Score: <span id="computerScore">0</span></p>
+        </div>
+        <div class="choices">
+            <button class="choice" id="rock"><i class="far fa-hand-rock"></i></button>
+            <button class="choice" id="paper"><i class="far fa-hand-paper"></i></button>
+            <button class="choice" id="scissors"><i class="far fa-hand-scissors"></i></button>
+        </div>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        const choices = document.querySelectorAll('.choice');
+        const result = document.getElementById('result');
+        let userScore = 0;
+        let computerScore = 0;
+
+        choices.forEach(choice => {
+            choice.addEventListener('click', () => {
+                const userChoice = choice.id;
+                const computerChoice = getComputerChoice();
+                const winner = getWinner(userChoice, computerChoice);
+                result.innerHTML = `You chose <b>${userChoice}.</b> <br>Computer chose <b>${computerChoice}.</b> <br> <b><u>${winner}</u></b>`;
+                updateScore(winner);
+            });
+        });
+
+        function getComputerChoice() {
+            const choices = ['rock', 'paper', 'scissors'];
+            const randomIndex = Math.floor(Math.random() * choices.length);
+            return choices[randomIndex];
+        }
+
+        function getWinner(userChoice, computerChoice) {
+            if (userChoice === computerChoice) {
+                return "It's a tie!";
+            } else if ((userChoice === 'rock' && computerChoice === 'scissors') ||
+                       (userChoice === 'paper' && computerChoice === 'rock') ||
+                       (userChoice === 'scissors' && computerChoice === 'paper')) {
+                userScore++;
+                return 'You win!';
+            } else {
+                computerScore++;
+                return 'Computer wins!';
+            }
+        }
+
+        function updateScore(winner) {
+            document.getElementById('userScore').textContent = userScore;
+            document.getElementById('computerScore').textContent = computerScore;
+        }
+    </script>
+</body>
+</html>

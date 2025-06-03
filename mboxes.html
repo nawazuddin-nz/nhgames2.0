@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MBoxes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-image: linear-gradient(to top, #accbee 0%, #e7f0fd 100%);
+            flex-direction: column;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            max-width: 500px;
+        }
+        .box {
+            width: 70px;
+            height: 70px;
+            margin: 10px;
+            background-color: rgba(204, 171, 127, 0.473);
+            display: flex;
+            border-radius: 10px;
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+            justify-content: center;
+            align-items: center;
+            color: rgb(10, 10, 10);
+            font-size: 23px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .unlocked {
+            background-color: rgb(84, 253, 78);
+        }
+        button {
+            margin: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+h2{
+    font-family: sans-serif;
+}
+#resetButton{
+ 
+  align-self: center;
+  background-color: #fff;
+  background-image: none;
+  background-position: 0 90%;
+  background-repeat: repeat no-repeat;
+  background-size: 4px 3px;
+  border-radius: 15px 225px 255px 15px 15px 255px 225px 15px;
+  border-style: solid;
+  border-width: 2px;
+  box-shadow: rgba(0, 0, 0, .2) 15px 28px 25px -18px;
+  box-sizing: border-box;
+  color: #000000;
+  cursor: pointer;
+  display: inline-block;
+  font-family:  sans-serif;
+  font-size: 1rem;
+  line-height: 23px;
+  outline: none;
+  padding: .75rem;
+  text-decoration: none;
+  transition: all 235ms ease-in-out;
+  border-bottom-left-radius: 15px 255px;
+  border-bottom-right-radius: 225px 15px;
+  border-top-left-radius: 255px 15px;
+  border-top-right-radius: 15px 225px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+#resetButton:hover {
+  box-shadow: rgba(0, 0, 0, .3) 2px 8px 8px -5px;
+  transform: translate3d(0, 2px, 0);
+  font-size: 1.2rem;
+}
+
+#resetButton:focus {
+  box-shadow: rgba(0, 0, 0, .3) 2px 8px 4px -6px;
+}
+
+
+
+    </style>
+</head>
+<body>
+    <h2>Levels of Logic!</h2>
+    <div class="container">
+        <div class="box" data-level="0">1</div>
+        <div class="box" data-level="1">2</div>
+        <div class="box" data-level="2">3</div>
+        <div class="box" data-level="3">4</div>
+        <div class="box" data-level="4">5</div>
+        <div class="box" data-level="5">6</div>
+        <div class="box" data-level="6">7</div>
+        <div class="box" data-level="7">8</div>
+        <div class="box" data-level="8">9</div>
+        <div class="box" data-level="9">10</div>
+        <div class="box" data-level="10">11</div>
+        <div class="box" data-level="11">12</div>
+        <div class="box" data-level="12">13</div>
+        <div class="box" data-level="13">14</div>
+        <div class="box" data-level="14">15</div>
+        <div class="box" data-level="15">16</div>
+        <div class="box" data-level="16">17</div>
+        <div class="box" data-level="17">18</div>
+        <div class="box" data-level="18">19</div>
+        <div class="box" data-level="19">20</div>
+    
+    </div>
+    <button id="resetButton">Reset</button>
+
+    <script src="mbox.js">
+       
+    </script>
+
+</html>

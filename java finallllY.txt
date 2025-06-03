@@ -1,0 +1,91 @@
+public class hello \n { \n public static void main(String[] args){ \n int a = 5; \n int b = 10; \n if (a < b) \n { \nif (b > 15) { \n  System.out.println("1"); \n  } else { \n   System.out.println("0"); \n } \n } 	else { \n System.out.println("000"); \n } \n } \n }
+
+2.
+public class hello \n { \n public static void main(String[] args){ \n int a = 5; \n int b = 10; \n if (a > b || (a + 5 == b && b - 5 == a)) \n System.out.println("1"); \n else  \n System.out.println("0"); \n } \n }
+
+
+3.
+public class hello { \n public static void main(String[] args) \n { \n int n1 = 5; \n int n2 = 10; \n float s = n1 + n2; \n System.out.println( s); \n } \n }
+
+
+4.
+public class hello { \n public static void main(String[] args) \n { \n int a = 5; \n int b = ++a; \n System.out.println( a); \n System.out.println( b); \n } \n }
+
+
+5.
+public class hello { \n public static void main(String[] args) { \n int x = 7; \n int y = 0; \n if (x > 10) \n y \n 10 - x; \n else \n y = 5*x; \n System.out.println(y); \n } \n }
+
+6.
+public class hello {\npublic static void main(String[] args) {\nint[] numbers = {1, 2, 3, 4, 5};\nfor (int number : numbers) {\nSystem.out.print(number);\n}\n}\n}
+
+7.
+public class hello {\npublic static void main(String[] args) {\nint x = 5;\nint y = 10;\nboolean result = (x >= 5) && (y <= 20);\nSystem.out.println(result);\n}\n}
+
+8.
+public class hello {\npublic static void main(String[] args) {\nint a = 6;\nboolean b = (a++ == 7);\nSystem.out.println(b);\n}\n}
+
+9.
+int x = 10;\nif (x < 5) \nSystem.out.println("Less than 5");\nelse \nswitch (x) {\ncase 5:\nSystem.out.println("Equal to 5");\nbreak;\ncase 10:\nSystem.out.println("Equal to 10");\nbreak;\ndefault:\nSystem.out.println("Greater than 10");\n}
+
+10.
+public class hello {\npublic static void main(String[] args) {\n//h=104\nchar c = 'h';\nint av = (int) c-24;\nSystem.out.println(av);\n}\n}
+
+
+11.
+public class hello {\npublic static void main(String[] args)\n{\nString str1 = new String("Hello");\nString str2 = new String("Hello");\nboolean ans1 = (str1 == str2);\nboolean ans2 = str1.equals(str2);\nSystem.out.println(ans1);\nSystem.out.println(ans2);\n//which is correct and which is false?\n}\n}
+
+
+12.
+public class hello {\npublic static void main(String[] args)\n{\nint result = add(3,7 );\nSystem.out.println(result);\n}\npublic static int add(int a, int b) {\nreturn a % b;\n}\n}
+
+
+
+13.
+public class hello{\npublic static void main(String[] args)\n{\nint a=10;\nint b=11;\nint c= ++b + a--;\nSystem.out.println(c);\n}\n}
+
+14.
+boolean isRaining = false;\nboolean isWeekend = true;\nif (isRaining && isWeekend) {\nSystem.out.println("Take an umbrella to work");\n}\nelse if (!isRaining && isWeekend) {\nSystem.out.println("Stay home and relax");\n}\nelse if (isRaining && isWeekend) {\nSystem.out.println("Go for a hike");\n}\nelse {\nSystem.out.println("Normal workday");\n}
+
+
+15.
+class hello{\npublic static void main(String[] args) {\nint a=10;\nint b=11;\nint c= (a*b)-b--+(a-26);\nSystem.out.println(c);\n}\n}
+
+
+16.
+class hello{\npublic static void main(String[] args){\nint n = 6;\nint a = 0, b = 1;\nfor (int i = 1; i <= n; i++) {\nSystem.out.print(a + " ");\nint sum = a + b;\na = b;\nb = sum;\n}\n}\n}
+
+17.
+public class hello {\npublic static void main(String[] args)\n{\nString str = "";\nboolean isEmpty = str.isEmpty();\nSystem.out.println(isEmpty);\n\nstr = null;\nboolean isNull = (str == null);\nSystem.out.println(isNull);\n}\n}
+
+
+18.
+int month = 8;\nString monthString;\nswitch (month) {\ncase 1: case 2: case 3:\nmonthString = "ONE";  break;\ncase 4: case 5: case 6:\nmonthString = "TWO";  break;\ncase 7: case 8: case 9:\nmonthString = "THREE"; break;\ncase 10: case 11: case 12:\nmonthString = "FOUR"; break;\ndefault:\nmonthString = "NONE"; break;\n}\nSystem.out.println(monthString);
+
+19.
+public class hello {\n    public static void main(String[] args) {\n int a = 4; \n  int b = 3; \n a |= b;\n  System.out.println(a);\n    }\n}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

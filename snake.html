@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="fonts.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <title>Snake Gam res</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background-color: #f1f1f1;
+      height: 100vh;
+      width: 100vw;
+      display: flex;
+      justify-content: flex-start;
+      flex-direction: column;
+      /* overflow: hidden; */
+    }
+h1{
+    margin: 0;
+    display: block;
+    text-align: center;
+    padding-top: 5px;
+}
+    #container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      width: 100%;
+    }
+
+    .flex-column {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    #left, #center, #right {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin: 10px;
+    }
+    
+    #gameContainer {
+      text-align: center;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    canvas {
+      border: 3px solid #333;
+      background-color: #545d72c9;
+      height: 450px;
+      width: 450px;
+      border-radius: 10px;
+      position: relative;
+      margin-bottom: 10px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #2fa033;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      margin: 5px;
+    }
+
+   
+    #scoreDisplay {
+      position: absolute;
+      left: 1px;
+      bottom: 25px;
+      font-size: 20px;
+      color: #111318;
+    }
+
+    #resultBox {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #4CAF50;
+      padding: 20px;
+      border: 2px solid black;
+      border-radius: 10px;
+      color: white;
+      display: none;
+    }
+
+    #resultBox.show {
+      display: block;
+    }
+
+    #resultBox button {
+      margin-top: 10px;
+      padding: 10px 20px;
+      background-color: #5f6760;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    #resultBox button:hover {
+      background-color: #505d72;
+    }
+
+    #arrowCircle {
+  position: relative;
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  border: 2px solid rgba(0, 0, 0, 0.2); /* Transparent border */
+  background-color: rgba(0, 0, 0, 0.1); /* Slightly opaque background */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.arrow-button {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  color: #333;
+  font-size: 20px;
+  cursor: pointer;
+  transition: color 0.3s, transform 0.3s;
+}
+
+.arrow-button:hover {
+  color: #2b517a;
+  transform: scale(1.1); /* Slight zoom effect */
+}
+
+/* Position buttons */
+#arrowUp {
+  top: 15%;
+  left: 46%;
+  transform: translate(-50%, -50%);
+}
+
+#arrowDown {
+  bottom: 15%;
+  left: 46%;
+  transform: translate(-50%, 50%);
+}
+
+#arrowLeft {
+  left: 15%;
+  top: 46%;
+  transform: translate(-50%, -50%);
+}
+
+#arrowRight {
+  right: 15%;
+  top: 46%;
+  transform: translate(50%, -50%);
+}
+
+
+    #speedControl {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-right: 20px; /* Margin to separate from the canvas */
+    }
+   
+
+    .speed-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #2e5986; /* Professional blue */
+      color: white;
+      border: none;
+      border-radius: 8px; /* Rounded corners */
+      cursor: pointer;
+      transition: background-color 0.3s, box-shadow 0.3s, transform 0.2s;
+      padding: 12px 20px;
+      width: 120px; /* Consistent button width */
+      text-align: center;
+      font-size: 14px;
+      font-weight: 500; /* Slightly lighter font weight */
+    }
+
+    .speed-button:hover {
+      background-color: #823e9b; /* Darker blue on hover */
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow effect */
+
+    }
+
+    .speed-button i {
+      font-size: 20px; /* Icon size */
+      margin-right: 10px; /* Space between icon and text */
+    }
+
+    .speed-button span {
+      font-size: 16px; /* Text size */
+    }
+
+
+    @media (max-width: 550px) {
+      canvas {
+        height: 80vw;
+        width: 80vw;
+      }
+      #gameContainer {
+        flex-direction: column;
+      }
+
+      .arrows {
+        height: 40vw;
+        width: 40vw;
+        margin: 10px;
+        background-color: crimson;
+        display: block;
+      }
+      #container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      width: 100%;
+    }
+#left{
+    flex-direction: row;
+    gap:10px;
+}
+#right{
+    margin-top: 5px;
+}
+.speed-button {
+      padding: 8px 10px;
+      width: 70px; /* Consistent button width */
+     
+      font-size: 30px;
+
+    }
+    .speed-button i {
+      font-size: 15px; /* Icon size */
+      margin-right: 5px; /* Space between icon and text */
+    }
+
+        
+    .speed-button span {
+      font-size: 12px; /* Text size */
+    }
+    }
+
+
+
+  </style>
+</head>
+<body>
+    <h1>Snake Game</h1>
+  <div id="container">
+    <div id="left" class="flex-column">
+        <button id="increaseSpeed" class="speed-button">
+            <i class="fas fa-arrow-up"></i> <span>Fast</span>
+          </button>
+          <button id="decreaseSpeed" class="speed-button">
+            <i class="fas fa-arrow-down"></i> <span>Slow</span>
+          </button>
+          <button id="normalSpeed" class="speed-button">
+            <i class="fas fa-play-circle"></i> <span>Normal</span>
+          </button>
+    </div>
+
+
+    <div id="center" class="flex-column">
+      <div id="gameContainer">
+        <canvas id="gameCanvas" width="800" height="600"></canvas>
+        <div id="resultBox">
+          <div id="resultText"></div>
+          <button id="restartBtn">Restart</button>
+        </div>
+        <div id="scoreDisplay">Score: 0</div>
+        <button id="startBtn">Start</button>
+      </div>
+    </div>
+
+
+
+    <div id="right" class="flex-column">
+     <div id="arrowCircle">
+  <button id="arrowUp" class="arrow-button"><i class="fa-solid fa-angles-up"></i></button>
+  <button id="arrowDown" class="arrow-button"><i class="fa-solid fa-angles-down"></i></button>
+  <button id="arrowLeft" class="arrow-button"><i class="fa-solid fa-angles-left"></i></button>
+  <button id="arrowRight" class="arrow-button"><i class="fa-solid fa-angles-right"></i></button>
+</div>
+
+  </div>
+
+  <script>
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
+
+    const cellSize = 20;
+    const gridSizeX = canvas.width / cellSize;
+    const gridSizeY = canvas.height / cellSize;
+    let snake = [{ x: 10, y: 10 }];
+    let direction = 'right';
+    let food = { x: 15, y: 15 };
+    let gameLoop;
+    let score = 0;
+    let speed = 100; // Default speed in milliseconds
+
+    function drawSnake() {
+      snake.forEach((segment, index) => {
+        ctx.fillStyle = index === 0 ? '#fadb2d' : '#f73b3b';
+        ctx.beginPath();
+        ctx.arc((segment.x * cellSize) + (cellSize / 2), (segment.y * cellSize) + (cellSize / 2), cellSize / 2, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.strokeStyle = '#333';
+        ctx.stroke();
+        if (index === 0) {
+          ctx.fillStyle = '#000';
+          ctx.beginPath();
+          ctx.arc((segment.x * cellSize) + (cellSize / 3), (segment.y * cellSize) + (cellSize / 3), cellSize / 8, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.beginPath();
+          ctx.arc((segment.x * cellSize) + (2 * cellSize / 3), (segment.y * cellSize) + (cellSize / 3), cellSize / 8, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      });
+    }
+
+    function drawFood() {
+      ctx.fillStyle = '#07eb07';
+      ctx.beginPath();
+      ctx.arc((food.x * cellSize) + (cellSize / 2), (food.y * cellSize) + (cellSize / 2), cellSize / 2, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    function update() {
+      let head = { x: snake[0].x, y: snake[0].y };
+
+      switch (direction) {
+        case 'up':
+          head.y -= 1;
+          break;
+        case 'down':
+          head.y += 1;
+          break;
+        case 'left':
+          head.x -= 1;
+          break;
+        case 'right':
+          head.x += 1;
+          break;
+      }
+
+      if (head.x < 0) head.x = gridSizeX - 1;
+      if (head.x >= gridSizeX) head.x = 0;
+      if (head.y < 0) head.y = gridSizeY - 1;
+      if (head.y >= gridSizeY) head.y = 0;
+
+      for (let i = 1; i < snake.length; i++) {
+        if (head.x === snake[i].x && head.y === snake[i].y) {
+          gameOver();
+          return;
+        }
+      }
+
+      if (head.x === food.x && head.y === food.y) {
+        const lastTail = snake[snake.length - 1];
+        snake.push(lastTail);
+        food = {
+          x: Math.floor(Math.random() * gridSizeX),
+          y: Math.floor(Math.random() * gridSizeY),
+        };
+        score++;
+        document.getElementById('scoreDisplay').textContent = 'Score: ' + score;
+      } else {
+        snake.pop();
+      }
+
+      snake.unshift(head);
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      drawSnake();
+      drawFood();
+    }
+
+    function gameOver() {
+      clearInterval(gameLoop);
+      document.getElementById('resultText').textContent = 'Game Over! Your score: ' + score;
+      document.getElementById('resultBox').classList.add('show');
+    }
+
+    function setDirection(newDirection) {
+      switch (newDirection) {
+        case 'up':
+          if (direction !== 'down') direction = 'up';
+          break;
+        case 'down':
+          if (direction !== 'up') direction = 'down';
+          break;
+        case 'left':
+          if (direction !== 'right') direction = 'left';
+          break;
+        case 'right':
+          if (direction !== 'left') direction = 'right';
+          break;
+      }
+    }
+
+    // Arrow button event listeners
+    document.getElementById('arrowUp').addEventListener('click', () => setDirection('up'));
+    document.getElementById('arrowDown').addEventListener('click', () => setDirection('down'));
+    document.getElementById('arrowLeft').addEventListener('click', () => setDirection('left'));
+    document.getElementById('arrowRight').addEventListener('click', () => setDirection('right'));
+
+    // Keyboard event listener
+    document.addEventListener('keydown', (event) => {
+      switch (event.key) {
+        case 'ArrowUp':
+          setDirection('up');
+          break;
+        case 'ArrowDown':
+          setDirection('down');
+          break;
+        case 'ArrowLeft':
+          setDirection('left');
+          break;
+        case 'ArrowRight':
+          setDirection('right');
+          break;
+      }
+    });
+
+    // Start button event listener
+    document.getElementById('startBtn').addEventListener('click', () => {
+      clearInterval(gameLoop);
+      snake = [{ x: 10, y: 10 }];
+      direction = 'right';
+      food = { x: 15, y: 15 };
+      score = 0;
+      document.getElementById('scoreDisplay').textContent = 'Score: ' + score;
+      document.getElementById('resultBox').classList.remove('show');
+      gameLoop = setInterval(update, speed);
+    });
+
+    // Restart button event listener
+    document.getElementById('restartBtn').addEventListener('click', () => {
+      document.getElementById('resultBox').classList.remove('show');
+      document.getElementById('startBtn').click();
+    });
+
+    // Speed control button event listeners
+    document.getElementById('increaseSpeed').addEventListener('click', () => {
+      if (speed > 20) { // Ensure speed does not get too fast
+        speed -= 20;
+        clearInterval(gameLoop);
+        gameLoop = setInterval(update, speed);
+      }
+    });
+
+    document.getElementById('decreaseSpeed').addEventListener('click', () => {
+      if (speed < 500) { // Ensure speed does not get too slow
+        speed += 20;
+        clearInterval(gameLoop);
+        gameLoop = setInterval(update, speed);
+      }
+    });
+
+    document.getElementById('normalSpeed').addEventListener('click', () => {
+      speed = 100; // Reset to default speed
+      clearInterval(gameLoop);
+      gameLoop = setInterval(update, speed);
+    });
+  </script>
+</body>
+</html>

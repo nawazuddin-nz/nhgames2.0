@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maze Game</title>
+    <style>
+
+body {
+            background-image: url();
+            font-family: Arial, sans-serif;
+            margin: 25px;
+            padding: 0;
+            overflow-x: hidden;
+        }
+/* 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000 */
+        .maincontainer {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            /* flex-wrap: wrap; */
+            align-items: center;
+            justify-content: center;
+            gap: 50px;
+        }
+
+        .container {
+            /* position: relative; */
+            height: 600px;
+            width: 600px;
+            border: 4mm ridge rgb(26, 1, 117);
+            /* box-sizing: border-box; */
+        }
+
+        .row {
+            width: 100%;
+            display: flex;
+        }
+
+        .cell {
+            background-color: #faf8f8;
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        .left-wall {
+            border-left: 2px solid rgb(80, 87, 145);
+        }
+
+        .right-wall {
+            border-right: 3px solid rgb(80, 87, 145);
+        }
+
+        .top-wall {
+            border-top: 2px solid rgb(80, 87, 145);
+        }
+
+        .bottom-wall {
+            border-bottom: 1px solid rgb(80, 87, 145);
+        }
+
+        .visited {
+            background: white;
+        }
+
+        .wrapper {
+            width: 100%;
+            height: 100%;
+            padding: 25%;
+        }
+
+        .point {
+            background: rgb(255, 0, 0);
+            border-radius: 50%;
+            width: 50%;
+            height: 50%;
+            position: absolute;
+            top: 25%;
+            left: 25%;
+        }
+
+        .blue {
+            background: blue;
+        }
+/* 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000 */
+        .buttons {
+          
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 25px;
+            justify-content: space-between;
+        }
+
+        @media (max-width:600px){
+
+            #oi {
+           margin-right: 20px;
+        }
+            .row {
+            width: 100%;
+            display: flex;
+        }
+     
+            .buttons{
+                flex-direction: row;
+            }
+          .btn{
+            width:70px !important; 
+            font-size: 10px !important;
+           
+          }
+          .left{
+            padding-left: 40px;
+            margin: 0;
+          }
+          .parent{
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+          }
+          .container {
+         
+            height: 380px;
+            width: 380px;
+            border: 4mm ridge rgb(26, 1, 117);
+            margin-left: 20px;
+        }
+
+        .right{
+            margin: auto;
+            margin-top: -40px;
+        }
+
+
+        }
+
+        .instructions-popup {
+            height: 300px;
+            width: 210px;
+            box-shadow: 0px 2px 3px 2px rgb(43, 24, 209);
+            position: fixed;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            overflow: hidden;
+            display: none;
+            z-index: 100;
+        }
+
+        .instructions-popup.show {
+            display: inline;
+        }
+
+        .instructions-content {
+            text-align: none;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 1px;
+            left: 25px;
+            border: none;
+            background: none;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .btn {
+            height: 40px;
+            width: 120px;
+            --border-color: linear-gradient(-45deg, #2f00ff, #7e03aa, #003cff);
+            --border-width: 0.125em;
+            --curve-size: 0.5em;
+            --blur: 30px;
+            --bg: #080312;
+            --color: #afffff;
+            gap: 10px;
+            color: var(--color);
+            cursor: pointer;
+            position: relative;
+            isolation: isolate;
+            display: inline;
+            place-content: center;
+            padding: 0.5em 1.5em;
+            font-size: 12px;
+            margin: -5px;
+            border: 0;
+            text-transform: uppercase;
+            box-shadow: 10px 10px 20px rgba(235, 2, 2, 0.6);
+            clip-path: polygon(
+                0% var(--curve-size),
+                var(--curve-size) 0,
+                100% 0,
+                100% calc(100% - var(--curve-size)),
+                calc(100% - var(--curve-size)) 100%,
+                0 100%
+            );
+            transition: color 250ms;
+        }
+
+        .btn::after,
+        .btn::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+        }
+
+        .btn::before {
+            background: var(--border-color);
+            background-size: 300% 300%;
+            animation: move-bg7234 5s ease infinite;
+            z-index: -2;
+        }
+
+        @keyframes move-bg7234 {
+            0% {
+                background-position: 31% 0%;
+            }
+
+            50% {
+                background-position: 70% 100%;
+            }
+
+            100% {
+                background-position: 31% 0%;
+            }
+        }
+
+        .btn::after {
+            background: var(--bg);
+            z-index: -1;
+            clip-path: polygon(
+                var(--border-width)
+                calc(var(--curve-size) + var(--border-width) * 0.5),
+                calc(var(--curve-size) + var(--border-width) * 0.5) var(--border-width),
+                calc(100% - var(--border-width)) var(--border-width),
+                calc(100% - var(--border-width))
+                calc(100% - calc(var(--curve-size) + var(--border-width) * 0.5)),
+                calc(100% - calc(var(--curve-size) + var(--border-width) * 0.5))
+                calc(100% - var(--border-width)),
+                var(--border-width) calc(100% - var(--border-width))
+            );
+            transition: clip-path 500ms;
+        }
+
+        .btn:where(:hover, :focus)::after {
+            clip-path: polygon(
+                calc(100% - var(--border-width))
+                calc(100% - calc(var(--curve-size) + var(--border-width) * 0.1)),
+                calc(100% - var(--border-width)) var(--border-width),
+                calc(100% - var(--border-width)) var(--border-width),
+                calc(100% - var(--border-width))
+                calc(100% - calc(var(--curve-size) + var(--border-width) * 0.5)),
+                calc(100% - calc(var(--curve-size) + var(--border-width) * 0.5))
+                calc(100% - var(--border-width)),
+                calc(100% - calc(var(--curve-size) + var(--border-width) * 0.5))
+                calc(100% - var(--border-width))
+            );
+            transition: 200ms;
+        }
+
+        .btn:where(:hover, :focus) {
+            color: #fff;
+        }
+
+        button {
+            position: relative;
+            height: 40px;
+            width: 80px;
+            display: inline-block;
+            margin: 15px;
+            padding: 15px 30px;
+            text-align: center;
+            font-size: 14px;
+            letter-spacing: 1px;
+            text-decoration: none;
+            color: #725ac1;
+            background: transparent;
+            cursor: pointer;
+            transition: ease-out 0.5s;
+            border: 2px solid #725ac1;
+            border-radius: 10px;
+            box-shadow: inset 0 0 0 0 #725ac1;
+        }
+  
+        /* #oi {
+            position: relative;
+            left: 25px;
+        } */
+
+        .closeb {
+            position: relative;
+            right: -8px;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        button:active {
+            transform: scale(0.9);
+        }
+
+        .passed {
+            background: white;
+        }
+
+        .arrow-buttons {
+    position: relative;
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    border: 2px solid rgba(0, 0, 0, 0.2); /* Transparent border */
+    background-color: rgba(0, 0, 0, 0.1); /* Slightly opaque background */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* margin-left: 100px; Adjust the positioning as needed */
+}
+
+.arrow-button {
+    position: absolute;
+    height: 2px;
+    width: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    color: #333;
+    /* font-size: 20px; */
+    cursor: pointer;
+    transition: color 0.3s, transform 0.3s;
+}
+.arrow-button:active{
+    outline: none;
+    
+}
+.arrow-button i {
+    font-size: 24px; /* Icon size */
+}
+
+.arrow-button:hover {
+    color: #2b517a;
+    /* transform: scale(1.1); Slight zoom effect */
+}
+
+/* Position buttons */
+#up {
+    top: 5%;
+    left: 44%;
+    transform: translate(-50%, -50%);
+}
+
+#down {
+    bottom: 5%;
+    left: 40%;
+    transform: translate(-50%, 50%);
+}
+
+#left {
+    left: 5%;
+    top: 40%;
+    transform: translate(-50%, -50%);
+}
+
+#right {
+    right: 5%;
+    top: 44%;
+    transform: translate(50%, -50%);
+}
+
+h1{
+    margin: 10px;
+    text-align: center;
+}
+
+    </style>
+</head>
+<body>
+    <h1>Maze Game.</h1>
+ <div class="maincontainer parent">
+    <div class="buttons left">
+        <button class="btn" id="ve" onclick="generateMaze(10)">Easy</button>
+        <button class="btn" id="n" onclick="generateMaze(20)">Normal</button>
+        <button class="btn" id="h" onclick="generateMaze(30)">Hard</button>
+        <br><br><br><br>
+        <button class="btn" id="oi" onclick="showInstructions()">Help</button>
+    </div>
+    <div class="container center"></div>
+    
+    <div class="instructions-popup" id="instructions-popup">
+       
+        <div class="instructions-content">
+            <h2>Instructions</h2>
+      <p>Reach the blue point to win the game!</p>
+      <p>Each time When you click on Easy, normal or Hard buttons, you will get a new maze pattern depending on the button you clicked.</p>
+        </div>
+        <button class="closeb" onclick="closeInstructions()">Close</button>
+    </div>
+    <div class="arrow-buttons right">
+        <button id="up" class="arrow-button"><i class="fa-solid fa-angles-up"></i></button>
+        <button id="down" class="arrow-button"><i class="fa-solid fa-angles-down"></i></button>
+        <button id="left" class="arrow-button"><i class="fa-solid fa-angles-left"></i></button>
+        <button id="right" class="arrow-button"><i class="fa-solid fa-angles-right"></i></button>
+    </div>
+    
+</div>
+    <script>
+       class Cell {
+    constructor(x, y, size) {
+        this.x = x;
+        this.y = y;
+        this.size = size;
+        this.walls = { top: true, right: true, bottom: true, left: true };
+        this.visited = false;
+    }
+
+    visit() {
+        this.visited = true;
+    }
+
+    randomNeighbor(grid) {
+        const neighbors = [];
+        if (this.y > 0 && !grid[this.y - 1][this.x].visited) neighbors.push(grid[this.y - 1][this.x]);
+        if (this.x < grid[0].length - 1 && !grid[this.y][this.x + 1].visited) neighbors.push(grid[this.y][this.x + 1]);
+        if (this.y < grid.length - 1 && !grid[this.y + 1][this.x].visited) neighbors.push(grid[this.y + 1][this.x]);
+        if (this.x > 0 && !grid[this.y][this.x - 1].visited) neighbors.push(grid[this.y][this.x - 1]);
+        if (neighbors.length === 0) return null;
+        return neighbors[Math.floor(Math.random() * neighbors.length)];
+    }
+}
+
+const createGrid = (n) => {
+    return Array.from({ length: n }, (_, y) =>
+        Array.from({ length: n }, (_, x) => new Cell(x, y, 20))
+    );
+};
+
+const removeWall = (current, neighbor) => {
+    if (current.x === neighbor.x && current.y === neighbor.y - 1) {
+        current.walls.bottom = false;
+        neighbor.walls.top = false;
+    } else if (current.x === neighbor.x && current.y === neighbor.y + 1) {
+        current.walls.top = false;
+        neighbor.walls.bottom = false;
+    } else if (current.y === neighbor.y && current.x === neighbor.x - 1) {
+        current.walls.right = false;
+        neighbor.walls.left = false;
+    } else if (current.y === neighbor.y && current.x === neighbor.x + 1) {
+        current.walls.left = false;
+        neighbor.walls.right = false;
+    }
+};
+
+const draw = (container, grid) => {
+    container.innerHTML = '';
+    grid.forEach(row => {
+        const rowDiv = document.createElement('div');
+        rowDiv.className = 'row';
+        row.forEach(cell => {
+            const cellDiv = document.createElement('div');
+            cellDiv.className = 'cell';
+            if (cell.walls.top) cellDiv.classList.add('top-wall');
+            if (cell.walls.right) cellDiv.classList.add('right-wall');
+            if (cell.walls.bottom) cellDiv.classList.add('bottom-wall');
+            if (cell.walls.left) cellDiv.classList.add('left-wall');
+            cellDiv.style.width = `${cell.size}px`;
+            cellDiv.style.height = `${cell.size}px`;
+            rowDiv.appendChild(cellDiv);
+        });
+        container.appendChild(rowDiv);
+    });
+};
+
+const showWinMessage = () => {
+    alert('You won!');
+    //generateMaze(n);
+    // Optionally, you can add more functionality here, such as resetting the game or starting a new level.
+    // Example:
+    // generateMaze(currentDifficulty);
+};
+
+const generateMaze = async (n) => {
+  // Get container dimensions
+  const container = document.querySelector(".container");
+  const containerSize = container.offsetWidth; // Assuming square container
+
+  // Calculate cell size based on the container size
+  const cellSize = Math.floor(containerSize / n);
+
+  // Adjust container height based on the calculated cell size
+  container.style.height = `${cellSize * n}px`;
+
+  const grid = createGrid(n).map((row, y) =>
+    row.map((_, x) => new Cell(x, y, cellSize))
+  );
+
+  const initialCell = grid[0][0];
+  initialCell.visit();
+
+  const stack = [initialCell];
+  let currentCell;
+
+  while (stack.length) {
+    currentCell = stack.pop();
+    const neighborCell = currentCell.randomNeighbor(grid);
+
+    if (neighborCell) {
+      stack.push(currentCell);
+      removeWall(currentCell, neighborCell);
+      neighborCell.visit();
+      stack.push(neighborCell);
+    }
+  }
+  
+  draw(container, grid);
+  createNavigator(n, grid);
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+  const n = 20; // Adjust based on the difficulty level
+  generateMaze(n);
+});
+
+function createNavigator(n, grid) {
+    const index = (x, y) => y * n + x;
+    const inGrid = (x, y) => 0 <= x && x < n && 0 <= y && y < n;
+    const point = '<div class="wrapper"><div class="point"></div></div>';
+    const bluePoint = '<div class="wrapper"><div class="point blue"></div></div>';
+    
+    let x = 0; // Red pointer starting x
+    let y = 0; // Red pointer starting y
+    const cells = document.querySelectorAll(".cell");
+    let currentCell = cells[index(x, y)];
+    currentCell.innerHTML = point;
+
+    // Place the blue pointer at the bottom-right corner
+    const blueX = n - 1;
+    const blueY = n - 1;
+    cells[index(blueX, blueY)].innerHTML = bluePoint;
+
+    const move = (dx, dy) => {
+        // Check boundaries
+        if (!inGrid(x + dx, y + dy)) return;
+        // Check walls
+        if (dx === 0 && dy === -1 && grid[y][x].walls.top) return;
+        if (dx === 0 && dy === 1 && grid[y][x].walls.bottom) return;
+        if (dx === -1 && dy === 0 && grid[y][x].walls.left) return;
+        if (dx === 1 && dy === 0 && grid[y][x].walls.right) return;
+
+        // Update position
+        x += dx;
+        y += dy;
+
+        // Update the current cell
+        const nextCell = cells[index(x, y)];
+       
+        // Clear the previous cell only if not at the goal
+        currentCell.innerHTML = "";
+        nextCell.innerHTML = point;
+        nextCell.classList.add("visited");
+        currentCell = nextCell;
+
+        // Check if the red pointer has reached the blue pointer
+        if (x === blueX && y === blueY) {
+            alert('You won!');
+           // generateMaze(n);
+            location.reload(); 
+        }
+    };
+
+    // Attach event listeners for movement
+    document.getElementById('up').addEventListener('click', () => move(0, -1));
+    document.getElementById('down').addEventListener('click', () => move(0, 1));
+    document.getElementById('left').addEventListener('click', () => move(-1, 0));
+    document.getElementById('right').addEventListener('click', () => move(1, 0));
+
+    // Keyboard controls
+    const handleKeyboardInput = (event) => {
+        switch(event.key) {
+            case 'ArrowUp':
+                move(0, -1);
+                break;
+            case 'ArrowDown':
+                move(0, 1);
+                break;
+            case 'ArrowLeft':
+                move(-1, 0);
+                break;
+            case 'ArrowRight':
+                move(1, 0);
+                break;
+        }
+    };
+
+    document.addEventListener('keydown', handleKeyboardInput);
+}
+
+
+
+
+
+function showInstructions() {
+    document.getElementById('instructions-popup').classList.add('show');
+}
+
+function closeInstructions() {
+    document.getElementById('instructions-popup').classList.remove('show');
+}
+
+// Initialize the maze
+document.addEventListener('DOMContentLoaded', () => {
+    generateMaze();
+});
+
+
+    </script>
+</body>
+</html>

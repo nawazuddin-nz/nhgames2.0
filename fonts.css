@@ -1,0 +1,28 @@
+
+
+@font-face {
+   font-family: jfont;
+   src: url('../font/jfont.ttf');
+ }
+   
+ @font-face {
+   font-family: chess;
+   src: url('../font/chess.ttf');
+ }
+ @font-face{
+   font-family: kalam;
+   src: url('../font/kalam.ttf');
+ }
+ @font-face{
+   font-family: ysab;
+   src: url('../font/ysab.ttf');
+ }
+ @font-face{
+   font-family: roboto;
+   src: url('../font/roboto-regular.ttf');
+ }
+ @font-face{
+   font-family: poppins;
+   src: url('../font/poppins-regular.ttf');
+ }
+ 
