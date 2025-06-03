@@ -2,28 +2,28 @@
 
 @font-face {
   font-family: jfont;
-  src: url('../font/jfont.ttf');
+  src: url('jfont.ttf');
 }
   
 @font-face {
   font-family: chess;
-  src: url('../font/chess.ttf');
+  src: url('chess.ttf');
 }
 @font-face{
   font-family: kalam;
-  src: url('../font/kalam.ttf');
+  src: url('kalam.ttf');
 }
 @font-face{
   font-family: ysab;
-  src: url('../font/ysab.ttf');
+  src: url('ysab.ttf');
 }
 @font-face{
   font-family: roboto;
-  src: url('../font/roboto-regular.ttf');
+  src: url('roboto-regular.ttf');
 }
 @font-face{
   font-family: poppins;
-  src: url('../font/poppins-regular.ttf');
+  src: url('poppins-regular.ttf');
 }
 
 /* End of customised fonts section  */
